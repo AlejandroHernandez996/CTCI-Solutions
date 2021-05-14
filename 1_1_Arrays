@@ -1,0 +1,31 @@
+1.1 Is Unique: Implement an algorithm to determine if a string has all unique characters. What if you
+cannot use additional data structures? 
+
+// If additional data structures use a set
+// add into set if set contains char then not unique
+// Time O(N)
+// Space O(N)
+public boolean unique(String s){
+
+  HashSet<Character> set = new HashSet<Character>();
+  
+  for(char c : s){
+    if(set.contains(c)){
+      return false;
+    }
+    s.add(c);
+  }
+  return true;
+}
+
+// No Set
+// if we sort first compare behind is not the same
+// Time O(NLogN)
+// Space O(1)
+public boolean unique(String s){
+  s.sort();
+  for(int x = 1;x < s.length();x++){
+    if(s[x-1] == s[x]) return false;
+    }
+    return true;
+}
