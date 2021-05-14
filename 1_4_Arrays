@@ -1,0 +1,37 @@
+Palindrome Permutation: Given a string, write a function to check if it is a permutation of
+a palindrome. A palindrome is a word or phrase that is the same forwards and backwards. A
+permutation is a rearrangement of letters. The palindrome does not need to be limited to just
+dictionary words.
+EXAMPLE
+Input: Tact Coa
+Output: True (permutations:"taco cat'; "atco cta'; etc.)
+
+// What makes a palindrome
+// ABA
+// AABBAA
+// CABAC
+// If its odd it needs 1 character to have ODD count and the rest need to have an EVEN
+// BCCAABAACCB B = 3
+// IF S LEN ODD THEN 1 ODD REST EVEN
+// IF S LEN EVEN THEN ALL EVEN
+
+public boolean doesStringHaveAPalindromePermutation(String s){
+
+  int[] alphabet = new int[26];
+  s = s.toLowerCase();
+  
+  for(char c in s){
+    alphabet[c-'a']++;
+  }
+  int evenCount = 0;
+  int uniqueCount = 0;
+  for(int count : alphabet){
+    if(count != 0 && count % 2 == 0) evenCount++;
+    if(count != 0) uniqueCount++;
+  }
+  
+  if(s.length() % 2 == 0){
+    return uniqueCount == eventCount;
+  }
+  return uniqueCount-1 == eventCount;
+}
