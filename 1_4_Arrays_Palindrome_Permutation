@@ -14,7 +14,8 @@ Output: True (permutations:"taco cat'; "atco cta'; etc.)
 // BCCAABAACCB B = 3
 // IF S LEN ODD THEN 1 ODD REST EVEN
 // IF S LEN EVEN THEN ALL EVEN
-
+// Time O(n)
+// Space O(1)
 public boolean doesStringHaveAPalindromePermutation(String s){
 
   int[] alphabet = new int[26];
