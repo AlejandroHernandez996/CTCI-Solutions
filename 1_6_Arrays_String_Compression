@@ -1,0 +1,32 @@
+1.6 String Compression: Implement a method to perform basic string compression using the counts
+of repeated characters. For example, the string aabcccccaaa would become a2blc5a3. If the
+"compressed" string would not become smaller than the original string, your method should return
+the original string. You can assume the string has only uppercase and lowercase letters (a - z). 
+
+// keep track of current char if it changes compress the string
+// if current compressed > normal string return normal string as it can only get bigger
+// Time: O(n)
+// Space: O(n);
+public String compress(String s){
+
+  StringBuilder sb = new StringBuilder();
+  char previous = s.charAt(0);
+  char current;
+  int count = 1;
+  
+  for(int  x = 1;x < s.length();x++){
+  
+     char current = s.charAt(x);
+     if(current != previous){
+      sb.append(count).append(previous);
+      previous = current;
+      count = 1;
+      if(sb.length() >= s.length()){
+        return s;
+      }
+     }
+  }
+  sb.append(count).append(current);
+  
+  return sb.toString();
+}
