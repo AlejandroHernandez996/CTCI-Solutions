@@ -1,0 +1,47 @@
+1.7 Rotate Matrix: Given an image represented by an NxN matrix, where each pixel in the image is 4
+bytes, write a method to rotate the image by 90 degrees. Can you do this in place? 
+
+// Rotate layer by layer?
+// 1 2 3
+// 4 5 6
+// 7 8 9
+//
+// Rotate 0 index
+// 7 2 1
+// 4 5 6
+// 9 8 3
+//
+// Rotate n-1 index
+// 7 4 1
+// 8 5 2
+// 9 6 3
+
+// 5 is rotated to 5 :)
+
+// matrix is always square
+// 1 temp 3 swaps
+// layers = 0 to n/2
+// specific layer loop 0 to n-1
+// Time O(n*n/2) = O(n^2)
+// Space O(1)
+
+public void rotate(int[][] matrix){
+    int n = matrix.length;
+    for(int y = 0;y < n/2;y++){
+      for(int x = 0;x < n;x++){
+        rotateLayer(x,y,n,matrix);
+      }
+    }
+}
+
+private void rotateLayer(int x, int y,int n, int[][] matrix){
+
+    int topLeft = matrix[y][x];
+    int topRight = matrix[x][n-y-1];
+    int bottomRight = matrix[n-y-1][n-x-1];
+    int bottomLeft = matrix[n-y-1][x];
+    matrix[y][x] = bottomLeft;
+    matrix[x][n-y-1] = topLeft;
+    matrix[n-y-1][n-x-1] = topRight;
+    matrix[n-y-1][x] = bottomRight;
+}
