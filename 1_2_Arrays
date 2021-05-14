@@ -1,0 +1,36 @@
+1.2 Check Permutation: Given two strings, write a method to decide if one is a permutation of the
+other. 
+
+
+// A permutation has the same characters as any other permutation
+// Count all character counts of A then compare to B if a count doesnt match or B char # > A char # not a permutation
+// Use a hashMap 
+
+public boolean arePermutations(String a, String b){
+
+    if(a.length() != b.length()) return false;
+    
+    int size = a.length();
+    int zeroCount = 0;
+    
+    HashMap<Character, Integer> aMap = new HashMap<Character, Integer>();
+    
+    for(char c : a){
+    
+      if(!aMap.containsKey(c)){
+        aMap.put(c,0);
+      }
+      aMap.put(c, aMap.get(c)+1);
+    }
+    for(char c : b){
+    
+      if(!aMap.containsKey(c)){
+        return false;
+      }
+      aMap.put(c, aMap.get(c)-1);
+      if(aMap.get(c) < 0) return false;
+      if(aMap.get(c) == 0) zeroCount++;
+    }
+    
+    return zeroCount == size;
+}
