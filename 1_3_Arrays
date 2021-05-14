@@ -1,0 +1,43 @@
+URLify: Write a method to replace all spaces in a string with '%20: You may assume that the string
+has sufficient space at the end to hold the additional characters, and that you are given the "true"
+length of the string. (Note: If implementing in Java, please use a character array so that you can
+perform this operation in place.)
+EXAMPLE
+Input: "Mr John Smith    ", 13
+Output: "Mr%20John%20Smith"
+
+// 2 Pointers? One starts at the back one starts where first non whitespace from the back is
+// "A B C D     "
+//        P2   P1
+// Copy over P2 to P1
+// Increment P1 and P2
+// if P2 is a space
+// P2 writes %20
+// P2 increments by 3
+// Time: O(N)
+// Space: O(1)
+    public void urlify(char[] url, int n){
+
+    int p1 = n-1;
+    int p2 = n-1;
+    
+    //First find first none white space from the back
+    while(url[p1] == ' '){
+      p1--;
+    }
+    // While P1 is still in the array keep copying
+    while(p1 > 0 && p2 > 0){
+       if(url[p1] != ' '){
+        url[p2] = url[p1];
+        p1--;
+        p2--;
+       }
+       else{
+        url[p2] = '0';
+        url[p2-1] = '2';
+        url[p2-2] = '%';
+        p2 -=3;
+        p1--;
+       }
+    }
+}
