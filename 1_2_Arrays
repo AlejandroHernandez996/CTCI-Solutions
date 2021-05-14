@@ -5,7 +5,8 @@ other.
 // A permutation has the same characters as any other permutation
 // Count all character counts of A then compare to B if a count doesnt match or B char # > A char # not a permutation
 // Use a hashMap 
-
+// Time O(2N) == O(N)
+// Space O(N)
 public boolean arePermutations(String a, String b){
 
     if(a.length() != b.length()) return false;
