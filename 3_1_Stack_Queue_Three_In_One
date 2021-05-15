@@ -1,0 +1,53 @@
+Three in One: Describe how you could use a single array to implement three stacks. 
+
+
+// partition the array into 3 areas
+// stack 1 would occupy 0-n/3
+// stack 2 would occupy (n/3)+1 to 2n/3
+// stack 3 would occupy 2n/3 + 1 to n-1
+
+
+public class ThreeInOneStack{
+
+  int[] sizes = new int[3];
+  int[] nextIndex = new int[3];
+  int[] arr;
+  int capacity;
+  public void ThreeInOneStack(int capacity){
+    this.capacity = capacity;
+    arr = new int[capacity];
+    nextIndex[0] = 0;
+    nextIndex[1] = (capacity/3)+1;
+    nextIndex[2] = (2*capacity/3)+1;
+  }
+  //stack 0,1,2
+  public bool push(int val, int stack){
+    if(stack < 0 || stack > 2) return false;
+    
+    if(sizes[stack] > capacity/3) return false;
+    
+    arr[nextIndex[stack]] = val;
+    nextIndex[stack]++;
+    sizes[stack]++;
+    return true;
+  }
+  public int pop(int stack){
+    if(stack < 0 || stack > 2) return Integer.MIN_VALUE;
+    if(sizes[stack] == 0) return Integer.MIN_VALUE;
+    
+    int val = arr[nextIndex[stack]-1];
+    nextIndex[stack]--;
+    size[stack]--;
+    return val;
+  }
+  public int peek(int stack){
+    if(stack < 0 || stack > 2) return Integer.MIN_VALUE;
+    if(sizes[stack] == 0) return Integer.MIN_VALUE;
+    
+    return arr[nextIndex[stack]-1];
+  }
+  public boo isEmpty(int stack)[
+    return sizes[stack] == 0;
+  }
+}
+
