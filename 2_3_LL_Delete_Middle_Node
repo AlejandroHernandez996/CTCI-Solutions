@@ -1,0 +1,24 @@
+Delete Middle Node: Implement an algorithm to delete a node in the middle (i.e., any node but
+the first and last node, not necessarily the exact middle) of a singly linked list, given only access to
+that node.
+EXAMPLE
+Input: the node c from the linked list a - >b- >c - >d - >e- >f
+Result: nothing is returned, but the new linked list looks like a - >b- >d - >e- >f 
+
+// if we are null or next is null then we cannot
+// else the next node is in the middle
+// current node.val = node.next.val
+// current node.next = node.next.next
+// will overwrite our node to the next node;
+// O(1) Time and Space
+public boolean deleteMiddleNode(Node node){
+
+  if(node == null || node.next == null) return false;
+  
+  Node next = node.next;
+  node.val = next.val;
+  node.next = next.next;
+  
+  return true;
+
+}
