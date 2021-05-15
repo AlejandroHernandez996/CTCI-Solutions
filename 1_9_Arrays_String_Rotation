@@ -1,0 +1,26 @@
+String Rotation: Assume you have a method i5Substring which checks ifone word is a substring
+of another. Given two strings, 51 and 52, write code to check if 52 is a rotation of 51 using only one
+call to isSubstring (e.g., Uwaterbottleuis a rotation ofuerbottlewatU). 
+
+// a rotation is just the string shifted places
+// a non rotated string has its head at 0 and its tail at len-1
+// if you rotate a string +1 to the right
+// head will be len % n and tail will be (len % n) -1
+// "ABC"
+// "CAB"
+// ABCABC
+//  if s1 is doubled if s2 will be inside there if its  rotated
+// O(N) time due to substring check
+// O(1) SPACE
+public boolean isRotated(String s1, String s2){
+
+  
+  if(s1.length() == s2.length() && s1.length() > 0){
+  
+    StringBuilder sb = StringBuilder().append(s1).append(s1);
+    
+    return isSubstring(sb.toString(),s2);
+  }
+  return false;
+
+}
