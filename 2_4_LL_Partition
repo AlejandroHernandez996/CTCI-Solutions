@@ -1,0 +1,67 @@
+Partition: Write code to partition a linked list around a value x, such that all nodes less than x come
+before all nodes greater than or equal to x. If x is contained within the list, the values of x only need
+to be after the elements less than x (see below). The partition element x can appear anywhere in the
+"right partition"; it does not need to appear between the left and right partitions.
+EXAMPLE
+Input: 3 -) 5 -) 8 -) 5 -) 113 -) 2 -) 1 [partition = 5]
+Output: 3 -) 1 -) 2 -) 113 -) 5 -) 5 -) 8 
+
+
+// Have a left and right node
+// Node.val >= x goes infront of right node
+// Node.val < x goes infront of left node the first one links to the right node
+// when done overwrite right node with next node and return left.next
+// if left.next == null nothing is less than x so return right.next
+// Time O(N) Space O(N)
+public Node paritionNodes(Node head, int x){
+  PNode pNode = new PNode();
+
+  while(head != null){
+    if(head.val >= x){
+      pNode.addToRight(head.val);
+    }
+    else{
+      pNode.addToLeft(head.val);
+    }
+    head = head.next;
+  }
+  pNode.left.next = pNode.right;
+  return pNode.getPartionedList();
+}
+
+public class PNode{
+
+  Node left = new Node();
+  Node right = new Node();
+  
+  public void addToRight(int n){
+  
+    Node node = new Node(n);
+    if(right.next == null){
+      right.next = node;
+    }else{
+      node.next = right.next;
+      right.next = node;
+    }
+  }
+  public void addToRight(int n){
+    Node node = new Node(n);
+    if(left.next == null){
+      node.next = right;
+      left.next = node;
+    }else{
+      node.next = left.next;
+      left.next = node;
+    }
+  }
+  
+  public Node getPartionedList(){
+  
+    if(left.next == null) return right.next;
+    
+    Node next = right.next;
+    right.val = next.val;
+    right.next = next.next;
+    return left.next;
+  }
+}
