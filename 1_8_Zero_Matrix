@@ -1,0 +1,73 @@
+1.8 Zero Matrix: Write an algorithm such that if an element in an MxN matrix is 0, its entire row and
+column are set to 0. 
+
+// We cannot just find a 0 and set row to zero and column to zero becuase that was evventually lead to everything overwritten
+// Instead lets use the 0 index of y and x to determine if that column or row should be set to 0
+// Example
+
+// 1 0 1
+// 1 1 0
+// 1 1 1
+
+// set 0th index of that column and row to 0
+// 1 0 0
+// 0 1 0
+// 1 1 1
+
+// 0 0 0
+// 0 0 0
+// 1 0 0
+
+// we must becarefule and do the 0,0 index last as that would set everything to 0
+// so lets have a boolean for the first column and row and see if itll be set to zero at the end
+// Time O(n^2)
+// Space = O(1)
+public void zeroMatrix(int[][] matrix){
+
+  boolean zeroCol = false;
+  boolean zeroRow = false;
+  
+  for(int y = 0;y < matrix.length;y++){
+  
+    if(matrix[y][0] == 0) zeroCol = true;
+    for(int x = 0;x < matrix[0].length;x++){
+    
+        if(y == 0 && matrix[y][x] == 0){
+          zeroRow = true;
+        }
+        
+        if(matrix[y][x] == 0){
+          matrix[0][x] = 0;
+          matrix[y][0] = 0;
+        }
+    }
+  }
+  for(int x = 1;x < matrix.length;x++){
+    if(matrix[0][x] == 0){
+      setColZero(x,matrix);
+    }
+    if(matrix[x][0] == 0){
+      setRowZero(x,matrix);
+    }
+  }
+  
+  if(zeroCol){
+    setColZero(0,matrix);
+  }
+  if(zeroRow){
+    setRowZero(0,matrix);
+  }
+}
+
+public void setRowZero(int row, int[][]matrix){
+
+  for(int x = 0;x < matrix[0].length;x++){
+   matrix[row][x] = 0;
+  }
+}
+public void setColZero(int col, int[][]matrix){
+
+  for(int y = 0;y < matrix.length;y++){
+   matrix[y][col] = 0;
+  }
+}
