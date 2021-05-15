@@ -1,0 +1,31 @@
+ Loop Detection: Given a circular linked list, implement an algorithm that returns the node at the
+beginning of the loop.
+DEFINITION
+Circular linked list: A (corrupt) linked list in which a node's next pointer points to an earlier node, so
+as to make a loop in the linked list.
+EXAMPLE
+Input: A - > B - > C - > D - > E - > C [the same C as earlier)
+Output: C 
+
+// if we reach null there is no loop
+// lets have a slow and fast pointer
+// one goes 1 step another goes 2 steps
+// if they ever equal each other a loop has happened
+public Node loopDetector(Node a){
+  Node slow = a;
+  Node fast = a;
+  
+  while(true){
+    slow = slow.next;
+    fast = fast.next.next;
+    if(fast == slow) break;
+  }
+  
+  if(slow == null || fast.next == null) return null;
+  slow = head;
+  while(slow != fast){
+    slow = slow.next;
+    fast = fast.next;
+  }
+  return fast;
+}
