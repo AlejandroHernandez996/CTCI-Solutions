@@ -1,0 +1,24 @@
+Palindrome: Implement a function to check if a linked list is a palindrome. 
+
+// palindrome is same reversed
+// so if we make a reverse copy and compare them
+// this would O(n) and space O(n)
+// an easier approach would be to store all the nodes into a list and compare them O(n) space and time
+
+// if we wanted to do this in O(1) space though...
+// actually....
+
+
+public void isLLPalindrome(Node a){
+
+  List<Integer> values = new ArrayList<Integer>();
+  
+  while(a != null){
+    values.add(a.val);
+    a = a.next;
+  }
+  for(int x = 0;x < values.size()/2;x++){
+    if(values[x] != values[values.size()-1-x]) return false;
+  }
+  return true;
+}
