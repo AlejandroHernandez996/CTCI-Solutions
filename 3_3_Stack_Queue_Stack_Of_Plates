@@ -1,0 +1,52 @@
+3.3 Stack of Plates: Imagine a (literal) stack of plates. If the stack gets too high, it might topple.
+Therefore, in real life, we would likely start a new stack when the previous stack exceeds some
+threshold. Implement a data structure SetOfStacks that mimics this. SetOfStacks should be
+composed of several stacks and should create a new stack once the previous one exceeds capacity.
+SetOfStacks. push () and SetOfStacks. pop() should behave identically to a single stack
+(that is, pop ( ) should return the same values as it would if there were just a single stack).
+FOLLOW UP
+Implement a function popAt (int index) which performs a pop operation on a specific substack. 
+
+
+//Quite similar to Three stack question but its NStacks
+
+// Stack<Stack<Integer>> sounds about right when empty pop the stack when full push a new stack
+// but if we want to index them later it needs to be ArrayList<Stack<Integer>>()
+
+
+public class NStack{
+
+  List<Stack<Integer>> nStack = new ArrayList<Stack<Integer>>();
+  
+  int capacity;
+  
+  public NStack(int capacity){
+    this.capacity = capacity;
+  }
+  
+  public void push(int val){
+  
+    if(nStack.get(nStack.size()-1).size() == capacity){
+      nStack.add(new Stack<Integer>());
+    }
+    nStack.get(nStack.size()-1).push(val);
+  }
+  public int pop(){
+    if(nStack.size() == 0) return -1;
+    if(nStack.get(nStack.size()-1).isEmpty()){
+      nStack.remogve(nStack.size()-1);
+      if(nStack.size() == 0) return -1;
+    }
+    
+    return nStack.get(nStack.size()-1).pop();
+  }
+  
+  public int popAt(int index){
+  
+    if(index >= 0 && nStack.size() > index && !nStack.get(index).isEmpty(){
+      return nStack.get(index).pop();
+    }
+    return -1;
+  }
+
+}
