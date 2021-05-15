@@ -1,0 +1,47 @@
+Intersection: Given two (singly) linked lists, determine if the two lists intersect. Return the
+intersecting node. Note that the intersection is defined based on reference, not value. That is, if the
+kth node of the first linked list is the exact same node (by reference) as the jth node of the second
+linked list, then they are intersecting. 
+
+// if we count the length of both the trim so both start at the same time then iterate and when node adress match we are at the node!
+// O(N) time and O(1) space
+
+public Node intersection(Node a, Node b){
+
+  int aCount = 0;
+  int bCount = 0;
+  
+  Node aCurrent = a;
+  Node bCurrent = b;
+  while(aCurrent && bCurrent){
+    if(aCurrent){
+      aCount++;
+      aCurrent = aCurrent.next;
+    }
+    if(bCurrent){
+      bCount++;
+      bCurrent = bCurrent.next;
+    }
+  }
+  aCurrent = a;
+  bCurrent = b;
+  
+  if(bCount > aCount){
+    for(int x  = 0;x < bCount-aCount;x++){
+      bCurrent = bCurrent.next;
+    }
+  }
+  if(aCount > bCount){
+    for(int x  = 0;x < aCount-bCount;x++){
+      aCurrent = aCurrent.next;
+    }
+  }
+  while(aCurrent != null){
+    if(aCurrent == bCurrent){
+      return aCurrent;
+    }
+    aCurrent = aCurrent.next;
+    bCurrent = bCurrent.next;
+  }
+  return null;
+}
