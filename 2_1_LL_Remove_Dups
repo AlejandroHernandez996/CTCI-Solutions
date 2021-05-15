@@ -1,0 +1,29 @@
+Remove Dups: Write code to remove duplicates from an unsorted linked list.
+FOLLOW UP
+How would you solve this problem if a temporary buffer is not allowed?
+
+
+// have a set of values if node contains value unlink it
+// Time O(N) Space O(N)
+// No buffer allowed: start at head and compare against rest of the list if value is equals then unlink it
+// this would be O(N^2) though
+
+public Node removeDups(Node head){
+
+  if(head == null || head.next == null) return head;
+  
+  HashSet<Integers> values = new HashSet<Integer>();
+  values.add(head.val);
+  Node current = head.next;
+  Node previous = head;
+  while(current != null){
+    if(values.contains(current.val)){
+      previous.next = current.next;
+    }else{
+      values.add(current.val);
+      previous = current;
+    }
+    current = current.next;
+  }
+  return head;
+}
