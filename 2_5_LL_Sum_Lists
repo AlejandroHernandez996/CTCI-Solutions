@@ -1,0 +1,59 @@
+Sum Lists: You have two numbers represented by a linked list, where each node contains a single
+digit. The digits are stored in reverse order, such that the 1 's digit is at the head of the list. Write a
+function that adds the two numbers and returns the sum as a linked list.
+EXAMPLE
+Input: (7-> 1 -> 6) + (5 -> 9 -> 2) .Thatis,617 + 295.
+Output: 2 - > 1 - > 9. That is, 912.
+FOLLOW UP
+Suppose the digits are stored in forward order. Repeat the above problem.
+Input: (6 -> 1 -> 7) + (2 -> 9 -> 5).Thatis,617 + 295.
+Output: 9 - > 1 - > 2. That is, 912. 
+
+// add nodes at the same time and keep track of carry if new value > 9 
+// if we run out of nodes point new head to current and keep going until carry is 0
+// if reach end and is null then point to new node of 1
+// Time O(A+B) = O(N)
+// Space O(1)
+
+
+public Node addTwoLists(Node a, Node b){
+
+  if(a == null) return b;
+  if(b == null) return a;
+  
+  Node aCurrent = a;
+  Node bCurrent = b;
+  int carry = 0;
+  
+  while(carry == 1 || (aCurrent.next != null || bCurrent.next != null)){
+    int val = carry;
+    carry = 0;
+    if(aCurrent.next == null && b == null &&  carry == 1){
+      aCurrent.next = new Node(1);
+      return a;
+    }
+    else if(aCurrent.next == null){
+      aCurrent.next == b.next;
+      b.next == null;
+    }
+    if(aCurrent && bCurrent){
+      val += aCurrent.val + bCurrent.val;
+      if(val > 9){
+        carry = 1;
+        val = 9;
+      }
+      aCurrent.val = 9;
+      aCurrent = aCurrent.next;
+      bCurrent = bCurrent.next;
+    }else{
+      val += aCurrent.val;
+      if(val > 9){
+        carry = 1;
+        val = 9;
+      }
+      aCurrent.val = val;
+      aCurrent = aCurrent.next;
+    }
+  }
+  return a;
+}
