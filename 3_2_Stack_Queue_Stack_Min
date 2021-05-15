@@ -1,0 +1,64 @@
+Stack Min: How would you design a stack which, in addition to push and pop, has a function min
+which returns the minimum element? Push, pop and min should all operate in 0(1) time. 
+
+// regular stack
+// have a Node that points to the first element
+// only point it when empty and you add a value
+// unlink it when empty
+
+
+class MinStack[
+
+  List<Integer> stack = new ArrayList<Integer>();
+  
+  Node head;
+  
+  int size;
+  
+  public Stack(){
+    size = 0;
+    tail = new Node();
+  }
+  public void push(int val){
+    if(size == 0){
+      head = new Node(val);
+      tail.next = head;
+    }else{
+      head.next = new Node(val);
+      head = head.next;
+    }
+    size++;
+  }
+  public int pop(){
+    if(size == 0) return -1;
+    
+    if(size == 1){
+      int val = head.val;
+      head = null;
+      tail.next = null;
+      size--;
+      return val;
+    }
+    
+    size--;
+  }
+  public int min(){
+  
+    if(size > 0){
+      return tail.next.val;
+    }
+    return -1;
+  }
+}
+
+class Node{
+
+  int val;
+  Node next;
+  
+  public Node(){
+  }
+  public Node(int val){
+    this.val = val;
+  }
+}
