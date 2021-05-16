@@ -1,0 +1,33 @@
+Minimal Tree: Given a sorted (increasing order) array with unique integer elements, write an
+algorithm to create a binary search tree with minimal height. 
+
+// BST rules
+// left is less than root
+// right is greater than root
+// left side ~= right side size
+// to make this possible we should have root be middle value
+// for example
+// 1 2 3 4 5 6 7 9 10
+// we would want to merge and conquer so each root is the middle
+//  5 is the middle
+// 1-4  2 would be middle
+// 6-10 8 would be middle
+
+
+
+Node createMinBST(int [] array){
+
+  return createMinBST(0,array.length-1,array);
+  
+}
+Node createMinBST(int l, int r, int[] array){
+
+  if(l >= r) return null;
+  
+  int m = (r-l)/2;
+  TreeNode node = new TreeNode(array[m]);
+  node.left = createMinBST(l,m-1,array);
+  node.right = createMinBST(m+1,r,array);
+  
+  return node;
+}
