@@ -1,0 +1,26 @@
+Check Balanced: Implement a function to check if a binary tree is balanced. For the purposes of
+this question, a balanced tree is defined to be a tree such that the heights of the two subtrees of any
+node never differ by more than one.
+
+boolean isBalanced = true;
+public boolean isTreeBalanced(Node root){
+
+  traverseAndCompare(root);
+  return isBalanced;
+}
+
+public int traverseAndCompare(Node root){
+
+  if(isBalanced == false) return -1;
+  
+  if(root == null) return 0;
+  
+  int leftHeight = traverseAndCompare(root.left);
+  int rightHeight = traverseAndCompare(root.right);
+  
+  if(rightHeight > leftHeight+1 || leftHeight > rightHeight+1) {
+    isBalanced = true;
+  }
+  
+  return Math.max(rightHeight,leftHeight)+1;
+}
