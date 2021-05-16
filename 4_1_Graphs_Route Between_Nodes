@@ -1,0 +1,33 @@
+Route Between Nodes: Given a directed graph, design an algorithm to find out whether there is a
+route between two nodes. 
+
+// Directed graphs has neighbor nodes
+// if we search from one node and we find the other node a route is found with simple bfs or dfs
+// lets do bfs :)
+// Space O(1) no extra space needed
+// Time O(N)
+public boolean hasRoute(Node a , Node b){
+  if(a == null || b == null) return false;
+  if(a == b) return true;
+  Queue<Node> q = new Queue<Node>();
+  q.add(a);
+  
+  while(!q.isEmpty()){
+    Node current = q.poll();
+    for(Node node : current.neighbors){
+      if(node == b) return true;
+      if(node.visited == false)
+      {
+        node.visited = true;
+        q.add(node);
+      }
+    }
+  }
+  return false;
+}
+
+public class Node{
+  int val;
+  boolean visited;
+  Node[] neighbors;
+}
