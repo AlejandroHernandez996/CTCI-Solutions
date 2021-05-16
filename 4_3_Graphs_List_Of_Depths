@@ -1,0 +1,26 @@
+List of Depths: Given a binary tree, design an algorithm which creates a linked list of all the nodes
+at each depth (e.g., if you have a tree with depth D, you'll have D linked lists). 
+
+// Any traversal is fine as long as we know what layer we are on
+// 1
+//2 3
+//45 67
+// {1},{2,3},{4,5,6,7}
+// Time O(N)
+// Space O(N)
+
+List<LinkedList<Node>> result = new ArrayList<LinkedList<Node>>();
+List<LinkedList<Node>>  createListOfDepth(Node root){
+    traverse(0,root);
+}
+
+void traverse(int layer, Node root){
+
+  if(root == null) return;
+  if(result.size()-1 < layer){
+    result.add(new LinkedList<Node>());
+  }
+  result.get(layer).add(root);
+  traverse(layer+1,root.left);
+  traverse(layer+1,root.right);
+}
